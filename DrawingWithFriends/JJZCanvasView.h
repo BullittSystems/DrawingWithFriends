@@ -13,7 +13,6 @@
 
 @protocol JJZCanvasViewDelegate <NSObject>
 - (void)canvasView:(JJZCanvasView *)canvasView didFinishDrawingPath:(JJZDrawingPath *)drawingPath;
-- (void)didClearCanvasView:(JJZCanvasView *)canvasView;
 @end
 
 

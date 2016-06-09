@@ -11,13 +11,19 @@
 #import "JJZCanvasView.h"
 #import "UIColor+Hex.h"
 #import "JJZCredentialManager.h"
+#import "JJZPeopleManager.h"
+#import "JJZPerson.h"
+#import "JJZDrawingManager.h"
 
 #import <TwilioConversationsClient/TwilioConversationsClient.h>
 
-@interface JJZMainViewController () <JJZCanvasViewDelegate, TwilioAccessManagerDelegate>
+@interface JJZMainViewController () <JJZCanvasViewDelegate, JJZPeopleManagerDelegate, TwilioAccessManagerDelegate, JJZDrawingManagerDelegate>
 @property (strong, nonatomic) IBOutlet JJZCanvasView *canvasView;
 
 @property (strong, nonatomic) TwilioAccessManager *accessManger;
+
+@property (strong, nonatomic) JJZPeopleManager *peopleManager;
+@property (strong, nonatomic) JJZDrawingManager *drawingManager;
 
 @end
 
@@ -25,8 +31,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.canvasView.delegate = self;
 
+    // Initially set it up with the name of the device. We could add the ability to change it later
+    self.peopleManager = [[JJZPeopleManager alloc] initWithMyName:[[UIDevice currentDevice] name] delegate:self];
+
+    self.drawingManager = [JJZDrawingManager new];
+    self.drawingManager.delegate = self;
+
+    self.canvasView.delegate = self;
     [self changeColor:self];
 
     typeof(self) __weak weakSelf = self;
@@ -51,16 +63,35 @@
 }
 
 - (IBAction)clearCanvas:(id)sender {
-    [self.canvasView clear];
+    [self.drawingManager clearDrawing];
 }
 
 #pragma mark - JJZCanvasViewDelegate
 - (void)canvasView:(JJZCanvasView *)canvasView didFinishDrawingPath:(JJZDrawingPath *)drawingPath {
-
+    DFlog(@"Send this path! %@", drawingPath);
+    [self.drawingManager persistDrawingPath:drawingPath];
 }
 
-- (void)didClearCanvasView:(JJZCanvasView *)canvasView {
+#pragma mark - JJZDrawingManagerDelegate
+- (void)drawingManager:(JJZDrawingManager *)drawingManager didReceiveDrawingPath:(JJZDrawingPath *)drawingPath {
+    [self.canvasView addDrawingPath:drawingPath];
+}
 
+- (void)drawingManagerDidClear:(JJZDrawingManager *)drawingManager {
+    [self.canvasView clear];
+}
+
+#pragma mark - JJZPeopleManagerDelegate
+- (void)peopleManager:(JJZPeopleManager *)peopleManager didAddPerson:(JJZPerson *)person {
+    DFlog(@"Added person: %@", [person debugDescription]);
+}
+
+- (void)peopleManager:(JJZPeopleManager *)peopleManager didUpdatePerson:(JJZPerson *)person {
+    DFlog(@"Updated person: %@", [person debugDescription]);
+}
+
+- (void)peopleManager:(JJZPeopleManager *)peopleManager didRemovePerson:(JJZPerson *)person {
+    DFlog(@"Removed person: %@", [person debugDescription]);
 }
 
 #pragma mark - TwilioAccessManagerDelegate

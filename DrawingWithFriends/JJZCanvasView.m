@@ -83,7 +83,7 @@
     [super drawRect:rect];
 
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.5f);
+    CGContextSetLineWidth(context, 0.75f);
 
     for (JJZDrawingPath *path in self.remotePaths) {
         [self drawPath:path withContext:context];
@@ -104,8 +104,6 @@
 - (void)clear {
     [self.remotePaths removeAllObjects];
     [self setNeedsDisplay];
-
-    [self.delegate didClearCanvasView:self];
 }
 
 - (void)touchesBegan:(NSSet *)touches
