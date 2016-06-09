@@ -38,12 +38,9 @@
 @property (nonatomic, strong) TWCIncomingInvite *incomingInvite;
 
 // Allow up to two people other people
-@property (nonatomic, weak) TWCParticipant *participant1;
-@property (nonatomic, weak) TWCParticipant *participant2;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, TWCParticipant *> *participants;
 
-@property (nonatomic, strong) JJZDraggableFloatyView *localVideoView;
-@property (nonatomic, strong) JJZDraggableFloatyView *participant1VideoView;
-@property (nonatomic, strong) JJZDraggableFloatyView *participant2VideoView;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, JJZDraggableFloatyView *> *videoViews;
 
 @property (strong, nonatomic) JJZPeopleManager *peopleManager;
 @property (strong, nonatomic) JJZDrawingManager *drawingManager;
@@ -57,6 +54,9 @@
 
     [TwilioConversationsClient setAudioOutput:TWCAudioOutputDefault];
 
+    self.participants = [NSMutableDictionary new];
+    self.videoViews = [NSMutableDictionary new];
+
     // Initially set it up with the name of the device. We could add the ability to change it later
     self.peopleManager = [[JJZPeopleManager alloc] initWithMyName:[[UIDevice currentDevice] name] delegate:self];
 
@@ -69,11 +69,6 @@
     // Initial UI State
     self.endConversationButton.enabled = NO;
     self.inviteButton.enabled = NO;
-
-    // Prepare our floaty views
-    self.localVideoView = [[JJZDraggableFloatyView alloc] initWithFrame:CGRectMake(20, 20, 120, 160)];
-    self.participant1VideoView = [[JJZDraggableFloatyView alloc] initWithFrame:CGRectMake(20, 200, 120, 160)];
-    self.participant2VideoView = [[JJZDraggableFloatyView alloc] initWithFrame:CGRectMake(20, 380, 120, 160)];
 
     // Finally, start listening for invites from others
     [self listenForInvites];
@@ -145,13 +140,19 @@
     self.endConversationButton.enabled = NO;
     [self updateInviteUI];
 
-    [self.localVideoView removeFromSuperview];
-    [self.participant1VideoView removeFromSuperview];
-    [self.participant2VideoView removeFromSuperview];
+    for (JJZDraggableFloatyView *view in [self.videoViews allValues]) {
+        [view removeFromSuperview];
+    }
+
+    [self.videoViews removeAllObjects];
 }
 
 // Setup local media
 - (void)prepareLocalMedia {
+    JJZDraggableFloatyView *localVideoView = [[JJZDraggableFloatyView alloc] initWithFrame:CGRectMake(20, 20, 120, 160)];
+    [self.view addSubview:localVideoView];
+    self.videoViews[self.peopleManager.myID] = localVideoView;
+
     self.localMedia = [[TWCLocalMedia alloc] initWithDelegate:self];
 
 #if !TARGET_IPHONE_SIMULATOR
@@ -160,7 +161,7 @@
 #endif
 
     if (self.camera) {
-        [self.camera.videoTrack attach:self.localVideoView];
+        [self.camera.videoTrack attach:localVideoView];
         self.camera.videoTrack.delegate = self;
     }
 }
@@ -216,8 +217,9 @@
             conversation.delegate = self;
             self.conversation = conversation;
 
-            if (self.localVideoView) {
-                [self.view addSubview:self.localVideoView];
+            JJZDraggableFloatyView *localVideoView = self.videoViews[self.peopleManager.myID];
+            if (localVideoView) {
+                [self.view addSubview:localVideoView];
             }
         }
         else {
@@ -326,13 +328,12 @@
 - (void)conversation:(nonnull TWCConversation *)conversation didConnectParticipant:(nonnull TWCParticipant *)participant {
     DFlog(@"conversation:didConnectParticipant:");
 
-    if (!self.participant1) {
-        self.participant1 = participant;
-        [self.view addSubview:self.participant1VideoView];
-    } else {
-        self.participant2 = participant;
-        [self.view addSubview:self.participant2VideoView];
-    }
+    self.participants[participant.identity] = participant;
+
+    // Prepare a floaty view for this participant
+    JJZDraggableFloatyView *videoView = [[JJZDraggableFloatyView alloc] initWithFrame:CGRectMake(20, 20 + (180 * [self.participants count]), 120, 160)];
+    [self.view addSubview:videoView];
+    self.videoViews[participant.identity] = videoView;
 
     participant.delegate = self;
 }
@@ -343,11 +344,10 @@
 
 - (void)conversation:(nonnull TWCConversation *)conversation didDisconnectParticipant:(nonnull TWCParticipant *)participant {
     DFlog(@"conversation:didDisconnectParticipant:");
-    if ([participant.identity isEqualToString:self.participant1.identity]) {
-        [self.participant1VideoView removeFromSuperview];
-    } else {
-        [self.participant2VideoView removeFromSuperview];
-    }
+    [self.videoViews[participant.identity] removeFromSuperview];
+    self.videoViews[participant.identity] = nil;
+
+    self.participants[participant.identity] = nil;
 }
 
 - (void)conversationEnded:(nonnull TWCConversation *)conversation {
@@ -381,13 +381,7 @@
 #pragma mark - TWCParticipantDelegate
 - (void)participant:(nonnull TWCParticipant *)participant addedVideoTrack:(nonnull TWCVideoTrack *)videoTrack {
     DFlog(@"participant:addedVideoTrack:");
-
-    if ([participant.identity isEqualToString:self.participant1.identity]) {
-        [videoTrack attach:self.participant1VideoView];
-    } else {
-        [videoTrack attach:self.participant2VideoView];
-    }
-
+    [videoTrack attach:self.videoViews[participant.identity]];
     videoTrack.delegate = self;
 }
 
