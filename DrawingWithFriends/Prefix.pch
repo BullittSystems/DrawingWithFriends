@@ -1,0 +1,25 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#endif
+
+#ifdef DEBUG
+
+#define DFlog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#define Dlog(...) NSLog(@"%@", [NSString stringWithFormat:__VA_ARGS__])
+#define DlogInit() { NSString *_tmp = [NSString stringWithCString:__PRETTY_FUNCTION__+2 encoding:NSUTF8StringEncoding]; NSRange _r = [_tmp rangeOfString:@" "]; NSString *_className = [_tmp substringToIndex:_r.location]; NSLog(@"init: <%@%@: %p>", NSStringFromClass([self class]), ![self isMemberOfClass:NSClassFromString(_className)] ? [NSString stringWithFormat:@"(%@)", _className] : @"", self); }
+#define DlogDealloc() { NSString *_tmp = [NSString stringWithCString:__PRETTY_FUNCTION__+2 encoding:NSUTF8StringEncoding]; NSRange _r = [_tmp rangeOfString:@" "]; NSString *_className = [_tmp substringToIndex:_r.location]; NSLog(@"dealloc: <%@%@: %p>", NSStringFromClass([self class]), ![self isMemberOfClass:NSClassFromString(_className)] ? [NSString stringWithFormat:@"(%@)", _className] : @"", self); }
+
+#else
+
+#define DFlog(...) do { } while (0)
+#define Dlog(...) do { } while (0)
+#define DlogDealloc() do { } while (0)
+
+#endif
