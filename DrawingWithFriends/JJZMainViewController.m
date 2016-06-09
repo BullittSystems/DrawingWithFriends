@@ -55,6 +55,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [TwilioConversationsClient setAudioOutput:TWCAudioOutputDefault];
+
     // Initially set it up with the name of the device. We could add the ability to change it later
     self.peopleManager = [[JJZPeopleManager alloc] initWithMyName:[[UIDevice currentDevice] name] delegate:self];
 
@@ -68,23 +70,10 @@
     self.endConversationButton.enabled = NO;
     self.inviteButton.enabled = NO;
 
-    [TwilioConversationsClient setAudioOutput:TWCAudioOutputDefault];
-
-    self.localMedia = [[TWCLocalMedia alloc] initWithDelegate:self];
-
-#if !TARGET_IPHONE_SIMULATOR
-    self.camera = [self.localMedia addCameraTrack];
-#else
-#endif
-
+    // Prepare our floaty views
     self.localVideoView = [[JJZDraggableFloatyView alloc] initWithFrame:CGRectMake(20, 20, 120, 160)];
     self.participant1VideoView = [[JJZDraggableFloatyView alloc] initWithFrame:CGRectMake(20, 200, 120, 160)];
     self.participant2VideoView = [[JJZDraggableFloatyView alloc] initWithFrame:CGRectMake(20, 380, 120, 160)];
-
-    if (self.camera) {
-        [self.camera.videoTrack attach:self.localVideoView];
-        self.camera.videoTrack.delegate = self;
-    }
 
     // Finally, start listening for invites from others
     [self listenForInvites];
@@ -148,6 +137,9 @@
     [self.incomingInvite reject];
     self.incomingInvite = nil;
 
+    self.localMedia = nil;
+    self.camera = nil;
+
     self.peopleManager.available = YES;
 
     self.endConversationButton.enabled = NO;
@@ -156,6 +148,21 @@
     [self.localVideoView removeFromSuperview];
     [self.participant1VideoView removeFromSuperview];
     [self.participant2VideoView removeFromSuperview];
+}
+
+// Setup local media
+- (void)prepareLocalMedia {
+    self.localMedia = [[TWCLocalMedia alloc] initWithDelegate:self];
+
+#if !TARGET_IPHONE_SIMULATOR
+    self.camera = [self.localMedia addCameraTrack];
+#else
+#endif
+
+    if (self.camera) {
+        [self.camera.videoTrack attach:self.localVideoView];
+        self.camera.videoTrack.delegate = self;
+    }
 }
 
 // RCP: Presently this is very brute force... Find the first two available people and invite them...
@@ -167,18 +174,33 @@
             [peopleIDs addObject:person.deviceIdentifier];
         }
 
-        // Only allow up to two other players at the present...
+        // Only allow up to two other people at the present...
         if ([peopleIDs count] == 2) {
             break;
         }
     }
 
+    [self prepareLocalMedia];
+
+    /*
+     RCP: So I am seeing a really odd thing with this... I can reproduce this when starting the
+     conversation from my iPad simulator and two actual devices. When the invites are received
+     on the iPads, the one has the identifer of the iPad simulator as the inviter.. And the other one
+     ends up getting the identifier of the first iPad.
+     
+     When the conversation is started from one of the iPads, both the simulator and other iPad see the 
+     inviter as the first iPad.
+     
+     OK. I take that back. Its reproduction is unreliable. It seems to have somethign to do with creating
+     susequent conversations.
+     */
     self.outgoingInvite = [self.conversationsClient inviteManyToConversation:peopleIDs
                                                                   localMedia:self.localMedia
                                                                      handler:[self acceptHandler]];
 }
 
 - (void)joinConversationFromInvite:(TWCIncomingInvite *)invite {
+    [self prepareLocalMedia];
     [invite acceptWithLocalMedia:self.localMedia
                       completion:[self acceptHandler]];
 
@@ -306,8 +328,10 @@
 
     if (!self.participant1) {
         self.participant1 = participant;
+        [self.view addSubview:self.participant1VideoView];
     } else {
         self.participant2 = participant;
+        [self.view addSubview:self.participant2VideoView];
     }
 
     participant.delegate = self;
@@ -319,6 +343,11 @@
 
 - (void)conversation:(nonnull TWCConversation *)conversation didDisconnectParticipant:(nonnull TWCParticipant *)participant {
     DFlog(@"conversation:didDisconnectParticipant:");
+    if ([participant.identity isEqualToString:self.participant1.identity]) {
+        [self.participant1VideoView removeFromSuperview];
+    } else {
+        [self.participant2VideoView removeFromSuperview];
+    }
 }
 
 - (void)conversationEnded:(nonnull TWCConversation *)conversation {
@@ -355,10 +384,8 @@
 
     if ([participant.identity isEqualToString:self.participant1.identity]) {
         [videoTrack attach:self.participant1VideoView];
-        [self.view addSubview:self.participant1VideoView];
     } else {
         [videoTrack attach:self.participant2VideoView];
-        [self.view addSubview:self.participant2VideoView];
     }
 
     videoTrack.delegate = self;
