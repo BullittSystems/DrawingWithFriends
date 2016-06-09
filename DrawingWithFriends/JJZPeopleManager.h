@@ -24,6 +24,7 @@
 
 @property (nonatomic, weak) id <JJZPeopleManagerDelegate> delegate;
 @property (nonatomic, strong) NSString *myName;
+@property (nonatomic, readonly) NSString *myID;
 @property (nonatomic, assign, getter=isAvailable) BOOL available;
 
 @property (nonatomic, readonly) NSArray<JJZPerson *> *people;

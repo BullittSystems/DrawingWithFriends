@@ -91,6 +91,10 @@ static NSString *const kPersonIsAvailableKey = @"is_available";
     return self.me.name;
 }
 
+- (NSString *)myID {
+    return self.me.deviceIdentifier;
+}
+
 - (void)setAvailable:(BOOL)available {
     [self updateAvailability:available];
 }
