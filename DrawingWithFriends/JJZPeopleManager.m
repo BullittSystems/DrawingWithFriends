@@ -12,7 +12,7 @@
 #import "JJZPerson.h"
 
 #pragma mark - Constants
-static NSString *const kFirebaseRootURL = @"https://ktne-communicator.firebaseio.com";
+static NSString *const kFirebaseRootURL = @"https://drawingwithfriends.firebaseio.com";
 static NSString *const kPeopleKey = @"people";
 static NSString *const kPersonNameKey = @"name";
 static NSString *const kPersonIsOnlineKey = @"is_online";
