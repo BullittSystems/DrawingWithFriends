@@ -36,14 +36,33 @@
                                     <action selector="clearCanvas:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cf5-Wd-hhn"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a5G-JH-ZDf">
+                                <rect key="frame" x="414" y="567" width="37" height="30"/>
+                                <state key="normal" title="Invite"/>
+                                <connections>
+                                    <action selector="invite:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rie-p9-hd1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5B-dx-dTo">
+                                <rect key="frame" x="459" y="567" width="121" height="30"/>
+                                <state key="normal" title="End Conversation"/>
+                                <connections>
+                                    <action selector="end:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wvv-s2-b7b"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="f5B-dx-dTo" firstAttribute="leading" secondItem="a5G-JH-ZDf" secondAttribute="trailing" constant="8" id="04e-jk-osA"/>
+                            <constraint firstItem="f5B-dx-dTo" firstAttribute="top" secondItem="yer-IL-XML" secondAttribute="bottom" constant="8" id="0BU-qu-k2D"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yer-IL-XML" secondAttribute="bottom" constant="41" id="K68-l7-OJv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yer-IL-XML" secondAttribute="trailing" constant="-20" id="T3m-3C-8ub"/>
                             <constraint firstAttribute="leadingMargin" secondItem="yd7-GX-B9I" secondAttribute="leading" id="Wd7-NL-Hfz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="f5B-dx-dTo" secondAttribute="trailing" id="cwh-r7-lbl"/>
                             <constraint firstItem="yer-IL-XML" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="l8e-8s-sQk"/>
+                            <constraint firstItem="a5G-JH-ZDf" firstAttribute="top" secondItem="yer-IL-XML" secondAttribute="bottom" constant="8" id="oNN-wC-65r"/>
                             <constraint firstItem="mji-Mm-ewC" firstAttribute="leading" secondItem="yd7-GX-B9I" secondAttribute="trailing" constant="9" id="qyC-HV-bZf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="f5B-dx-dTo" secondAttribute="trailing" id="rfP-aZ-5Lf"/>
                             <constraint firstItem="yer-IL-XML" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="rkk-Kw-FDo"/>
                             <constraint firstItem="mji-Mm-ewC" firstAttribute="top" secondItem="yer-IL-XML" secondAttribute="bottom" constant="8" id="wN1-KU-Ve1"/>
                             <constraint firstItem="yd7-GX-B9I" firstAttribute="top" secondItem="yer-IL-XML" secondAttribute="bottom" constant="8" id="zu3-Gh-SVb"/>
@@ -51,6 +70,8 @@
                     </view>
                     <connections>
                         <outlet property="canvasView" destination="yer-IL-XML" id="wjh-xO-eYG"/>
+                        <outlet property="endConversationButton" destination="f5B-dx-dTo" id="KO7-2X-PEC"/>
+                        <outlet property="inviteButton" destination="a5G-JH-ZDf" id="E8p-LI-PuR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
