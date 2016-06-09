@@ -20,7 +20,7 @@ static NSString *const kPersonIsAvailableKey = @"is_available";
 
 @interface JJZPeopleManager()
 
-@property (nonatomic, strong) NSMutableDictionary<NSString *, JJZPerson *> *people;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, JJZPerson *> *peopleDict;
 @property (nonatomic, strong) JJZPerson *me;
 
 // Firebase references
@@ -56,8 +56,9 @@ static NSString *const kPersonIsAvailableKey = @"is_available";
         _me.name = myName;
         _me.deviceIdentifier = [[UIDevice currentDevice] jjz_deviceUUID];
         _me.online = YES;
+        _me.available = YES;
 
-        _people = [NSMutableDictionary new];
+        _peopleDict = [NSMutableDictionary new];
         _rootRef = [[Firebase alloc] initWithUrl:kFirebaseRootURL];
         _peopleRef = [_rootRef childByAppendingPath:kPeopleKey];
         _myPersonRef = [_peopleRef childByAppendingPath:_me.deviceIdentifier];
@@ -100,7 +101,7 @@ static NSString *const kPersonIsAvailableKey = @"is_available";
 
 #pragma mark - People Collection Methods
 - (void)addPerson:(JJZPerson *)person {
-    self.people[person.deviceIdentifier] = person;
+    self.peopleDict[person.deviceIdentifier] = person;
 
     if ([self.delegate respondsToSelector:@selector(peopleManager:didAddPerson:)]) {
         [self.delegate peopleManager:self didAddPerson:person];
@@ -108,7 +109,7 @@ static NSString *const kPersonIsAvailableKey = @"is_available";
 }
 
 - (void)updatePerson:(JJZPerson *)person {
-    self.people[person.deviceIdentifier] = person;
+    self.peopleDict[person.deviceIdentifier] = person;
 
     if ([self.delegate respondsToSelector:@selector(peopleManager:didUpdatePerson:)]) {
         [self.delegate peopleManager:self didUpdatePerson:person];
@@ -116,10 +117,10 @@ static NSString *const kPersonIsAvailableKey = @"is_available";
 }
 
 - (void)removePersonByKey:(NSString *)key {
-    JJZPerson *person = self.people[key];
+    JJZPerson *person = self.peopleDict[key];
 
     if (person) {
-        self.people[key] = nil;
+        self.peopleDict[key] = nil;
 
         if ([self.delegate respondsToSelector:@selector(peopleManager:didRemovePerson:)]) {
             [self.delegate peopleManager:self didRemovePerson:person];
@@ -143,12 +144,12 @@ static NSString *const kPersonIsAvailableKey = @"is_available";
     return person;
 }
 
-- (NSArray *)availablePeople {
-    return [self.people allValues];
+- (NSArray *)people {
+    return [self.peopleDict allValues];
 }
 
 - (JJZPerson *)personForIdentifier:(NSString *)identifier {
-    return self.people[identifier];
+    return self.peopleDict[identifier];
 }
 
 #pragma mark - Local Change Notification Handlers

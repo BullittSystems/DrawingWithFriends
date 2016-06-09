@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSString *myName;
 @property (nonatomic, assign, getter=isAvailable) BOOL available;
 
-@property (nonatomic, readonly) NSArray<JJZPerson *> *availablePeople;
+@property (nonatomic, readonly) NSArray<JJZPerson *> *people;
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithMyName:(NSString *)myName delegate:(id <JJZPeopleManagerDelegate>)delegate NS_DESIGNATED_INITIALIZER;
