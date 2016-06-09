@@ -13,4 +13,5 @@
 + (UIColor *)jjz_colorFromHexString:(NSString *)hexString;
 - (NSString *)jjz_hexString;
 
++ (UIColor *)jjz_randomColor;
 @end

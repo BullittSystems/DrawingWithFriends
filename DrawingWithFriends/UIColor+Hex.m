@@ -10,16 +10,13 @@
 
 @implementation UIColor (Hex)
 
-+ (UIColor *)jjz_colorFromHexString:(NSString *)hexString
-{
++ (UIColor *)jjz_colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
 
-    if (hexString)
-    {
+    if (hexString) {
         NSScanner *scanner = [NSScanner scannerWithString:hexString];
 
-        if ([hexString hasPrefix:@"#"])
-        {
+        if ([hexString hasPrefix:@"#"]) {
             [scanner setScanLocation:1];
         }
 
@@ -32,13 +29,11 @@
                            alpha:1.0];
 }
 
-- (NSString *)jjz_hexString
-{
+- (NSString *)jjz_hexString {
     NSString *hexString = @"#ffffff";
 
     // Special case, as white doesn't fall into the RGB color space
-    if (self != [UIColor whiteColor])
-    {
+    if (self != [UIColor whiteColor]) {
         CGFloat red;
         CGFloat blue;
         CGFloat green;
@@ -56,5 +51,16 @@
     return hexString;
 }
 
++ (NSString *)jjz_randomHexString {
+    unsigned int red = floor(arc4random() % 255);
+    unsigned int green = floor(arc4random() % 255);
+    unsigned int blue = floor(arc4random() % 255);
+
+    return [NSString stringWithFormat:@"#%02x%02x%02x", red, green, blue];
+}
+
++ (UIColor *)jjz_randomColor {
+    return [UIColor jjz_colorFromHexString:[UIColor jjz_randomHexString]];
+}
 
 @end
