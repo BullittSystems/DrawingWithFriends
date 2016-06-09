@@ -10,9 +10,14 @@
 #import "JJZDraggableFloatyView.h"
 #import "JJZCanvasView.h"
 #import "UIColor+Hex.h"
+#import "JJZCredentialManager.h"
 
-@interface JJZMainViewController () <JJZCanvasViewDelegate>
+#import <TwilioConversationsClient/TwilioConversationsClient.h>
+
+@interface JJZMainViewController () <JJZCanvasViewDelegate, TwilioAccessManagerDelegate>
 @property (strong, nonatomic) IBOutlet JJZCanvasView *canvasView;
+
+@property (strong, nonatomic) TwilioAccessManager *accessManger;
 
 @end
 
@@ -23,6 +28,16 @@
     self.canvasView.delegate = self;
 
     [self changeColor:self];
+
+    typeof(self) __weak weakSelf = self;
+    [JJZCredentialManager retrieveAccessTokenWithCompletionBlock:^(NSString *accessToken, NSError *error) {
+        if (accessToken) {
+            typeof(self) __strong strongSelf = weakSelf;
+            strongSelf.accessManger = [TwilioAccessManager accessManagerWithToken:accessToken delegate:self];
+        } else if (error) {
+            NSLog(@"Error retrieving token: %@", error.localizedDescription);
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,6 +61,15 @@
 
 - (void)didClearCanvasView:(JJZCanvasView *)canvasView {
 
+}
+
+#pragma mark - TwilioAccessManagerDelegate
+- (void)accessManagerTokenExpired:(TwilioAccessManager *)accessManager {
+    DFlog(@"Access Token expired!!!");
+}
+
+- (void)accessManager:(TwilioAccessManager *)accessManager error:(NSError *)error {
+    DFlog(@"AccessManager Error: %@", error.localizedDescription);
 }
 
 @end
