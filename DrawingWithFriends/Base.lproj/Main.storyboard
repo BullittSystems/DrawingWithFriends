@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Main View Controller-->
@@ -13,14 +14,48 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="JJZCanvasView">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yer-IL-XML" customClass="JJZCanvasView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="559"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yd7-GX-B9I">
+                                <rect key="frame" x="20" y="567" width="37" height="30"/>
+                                <state key="normal" title="Color"/>
+                                <connections>
+                                    <action selector="changeColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rYg-EY-c3i"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mji-Mm-ewC">
+                                <rect key="frame" x="66" y="567" width="36" height="30"/>
+                                <state key="normal" title="Clear"/>
+                                <connections>
+                                    <action selector="clearCanvas:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cf5-Wd-hhn"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yer-IL-XML" secondAttribute="bottom" constant="41" id="K68-l7-OJv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yer-IL-XML" secondAttribute="trailing" constant="-20" id="T3m-3C-8ub"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="yd7-GX-B9I" secondAttribute="leading" id="Wd7-NL-Hfz"/>
+                            <constraint firstItem="yer-IL-XML" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="l8e-8s-sQk"/>
+                            <constraint firstItem="mji-Mm-ewC" firstAttribute="leading" secondItem="yd7-GX-B9I" secondAttribute="trailing" constant="9" id="qyC-HV-bZf"/>
+                            <constraint firstItem="yer-IL-XML" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="rkk-Kw-FDo"/>
+                            <constraint firstItem="mji-Mm-ewC" firstAttribute="top" secondItem="yer-IL-XML" secondAttribute="bottom" constant="8" id="wN1-KU-Ve1"/>
+                            <constraint firstItem="yd7-GX-B9I" firstAttribute="top" secondItem="yer-IL-XML" secondAttribute="bottom" constant="8" id="zu3-Gh-SVb"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="canvasView" destination="yer-IL-XML" id="wjh-xO-eYG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="437" y="310"/>
         </scene>
     </scenes>
 </document>
