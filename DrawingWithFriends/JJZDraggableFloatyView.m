@@ -48,6 +48,8 @@
 
 - (void)performSetup
 {
+    self.backgroundColor = [UIColor whiteColor];
+
     self.layer.shadowColor = [UIColor blackColor].CGColor;
     self.layer.shadowOffset = CGSizeMake(2, 2);
     self.layer.shadowRadius = 3.5;
