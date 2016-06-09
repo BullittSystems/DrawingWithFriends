@@ -50,6 +50,8 @@ static NSString *const kPersonIsAvailableKey = @"is_available";
     self = [super init];
 
     if (self) {
+        _delegate = delegate;
+
         _me = [JJZPerson new];
         _me.name = myName;
         _me.deviceIdentifier = [[UIDevice currentDevice] jjz_deviceUUID];
