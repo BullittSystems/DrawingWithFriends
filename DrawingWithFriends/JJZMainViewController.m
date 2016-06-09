@@ -38,9 +38,12 @@
 @property (nonatomic, strong) TWCIncomingInvite *incomingInvite;
 
 // Allow up to two people other people
-@property (weak, nonatomic) TWCParticipant *participant1;
-@property (weak, nonatomic) TWCParticipant *participant2;
+@property (nonatomic, weak) TWCParticipant *participant1;
+@property (nonatomic, weak) TWCParticipant *participant2;
 
+@property (nonatomic, strong) JJZDraggableFloatyView *localVideoView;
+@property (nonatomic, strong) JJZDraggableFloatyView *participant1VideoView;
+@property (nonatomic, strong) JJZDraggableFloatyView *participant2VideoView;
 
 @property (strong, nonatomic) JJZPeopleManager *peopleManager;
 @property (strong, nonatomic) JJZDrawingManager *drawingManager;
@@ -72,35 +75,20 @@
 #if !TARGET_IPHONE_SIMULATOR
     self.camera = [self.localMedia addCameraTrack];
 #else
-
 #endif
 
+    self.localVideoView = [[JJZDraggableFloatyView alloc] initWithFrame:CGRectMake(20, 20, 120, 160)];
+    self.participant1VideoView = [[JJZDraggableFloatyView alloc] initWithFrame:CGRectMake(20, 200, 120, 160)];
+    self.participant2VideoView = [[JJZDraggableFloatyView alloc] initWithFrame:CGRectMake(20, 380, 120, 160)];
+
     if (self.camera) {
-//        [self.camera.videoTrack attach:self.localVideoView];
+        [self.camera.videoTrack attach:self.localVideoView];
         self.camera.videoTrack.delegate = self;
     }
 
     // Finally, start listening for invites from others
     [self listenForInvites];
 }
-
-//- (void)updateViewConstraints
-//{
-//    [self.view updateConstraints];
-//
-//    TWCVideoTrack *cameraTrack = self.camera.videoTrack;
-//    if (cameraTrack && cameraTrack.videoDimensions.width > 0 && cameraTrack.videoDimensions.height > 0) {
-//        CMVideoDimensions dimensions = self.camera.videoTrack.videoDimensions;
-//
-//        if (dimensions.width > 0 && dimensions.height > 0) {
-//            CGRect boundingRect = CGRectMake(0, 0, 160, 160);
-//            CGRect fitRect = AVMakeRectWithAspectRatioInsideRect(CGSizeMake(dimensions.width, dimensions.height), boundingRect);
-//            CGSize fitSize = fitRect.size;
-//            self.localVideoWidthConstraint.constant = fitSize.width;
-//            self.localVideoHeightConstraint.constant = fitSize.height;
-//        }
-//    }
-//}
 
 - (void)listenForInvites {
     [TwilioConversationsClient setLogLevel:TWCLogLevelWarning];
@@ -164,6 +152,10 @@
 
     self.endConversationButton.enabled = NO;
     [self updateInviteUI];
+
+    [self.localVideoView removeFromSuperview];
+    [self.participant1VideoView removeFromSuperview];
+    [self.participant2VideoView removeFromSuperview];
 }
 
 // RCP: Presently this is very brute force... Find the first two available people and invite them...
@@ -201,6 +193,10 @@
         if (conversation) {
             conversation.delegate = self;
             self.conversation = conversation;
+
+            if (self.localVideoView) {
+                [self.view addSubview:self.localVideoView];
+            }
         }
         else {
             DFlog(@"Invite failed with error: %@", error);
@@ -358,9 +354,11 @@
     DFlog(@"participant:addedVideoTrack:");
 
     if ([participant.identity isEqualToString:self.participant1.identity]) {
-//        [videoTrack attach:self.remoteVideoView1];
+        [videoTrack attach:self.participant1VideoView];
+        [self.view addSubview:self.participant1VideoView];
     } else {
-//        [videoTrack attach:self.remoteVideoView2];
+        [videoTrack attach:self.participant2VideoView];
+        [self.view addSubview:self.participant2VideoView];
     }
 
     videoTrack.delegate = self;
