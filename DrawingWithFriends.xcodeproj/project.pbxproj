@@ -15,6 +15,7 @@
 		0B9B20B81D08E4B50038601D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B9B20B61D08E4B50038601D /* LaunchScreen.storyboard */; };
 		0B9B20C31D08E4B50038601D /* DrawingWithFriendsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20C21D08E4B50038601D /* DrawingWithFriendsTests.m */; };
 		0B9B20CE1D08E4B50038601D /* DrawingWithFriendsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20CD1D08E4B50038601D /* DrawingWithFriendsUITests.m */; };
+		0B9B20E31D08ED910038601D /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20E21D08ED910038601D /* UIDevice+Extensions.m */; };
 		225D9279F117026FCCA85BC7 /* libPods-DrawingWithFriends.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AFD0AB56BA7C0181DC2CF7C /* libPods-DrawingWithFriends.a */; };
 		50A0C6826D307D1B7F509A6B /* libPods-DrawingWithFriendsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD2A574AFBDAC004593249E /* libPods-DrawingWithFriendsUITests.a */; };
 		8346ADCC4056874A5FB7FA68 /* libPods-DrawingWithFriendsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EEE093CC78E69774F05B009 /* libPods-DrawingWithFriendsTests.a */; };
@@ -56,6 +57,8 @@
 		0B9B20CD1D08E4B50038601D /* DrawingWithFriendsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawingWithFriendsUITests.m; sourceTree = "<group>"; };
 		0B9B20CF1D08E4B50038601D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B9B20E01D08EC2B0038601D /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		0B9B20E11D08ED910038601D /* UIDevice+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extensions.h"; sourceTree = "<group>"; };
+		0B9B20E21D08ED910038601D /* UIDevice+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extensions.m"; sourceTree = "<group>"; };
 		0DD2A574AFBDAC004593249E /* libPods-DrawingWithFriendsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawingWithFriendsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EEE093CC78E69774F05B009 /* libPods-DrawingWithFriendsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawingWithFriendsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17805136458DE68C71FA6DF0 /* Pods-DrawingWithFriends.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawingWithFriends.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrawingWithFriends/Pods-DrawingWithFriends.release.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 		0B9B20DB1D08EB3A0038601D /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				0B9B20E11D08ED910038601D /* UIDevice+Extensions.h */,
+				0B9B20E21D08ED910038601D /* UIDevice+Extensions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B9B20B01D08E4B50038601D /* JJZViewController.m in Sources */,
+				0B9B20E31D08ED910038601D /* UIDevice+Extensions.m in Sources */,
 				0B9B20AD1D08E4B50038601D /* JJZAppDelegate.m in Sources */,
 				0B9B20AA1D08E4B50038601D /* main.m in Sources */,
 			);
