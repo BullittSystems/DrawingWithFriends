@@ -11,7 +11,6 @@ target 'DrawingWithFriends' do
   # Pods for DrawingWithFriends
   pod 'TwilioConversationsClient', '~>0.24.0'  
   pod 'Firebase', '<3.0'
-  pod 'NKOColorPickerView'
 
   target 'DrawingWithFriendsTests' do
     inherit! :search_paths

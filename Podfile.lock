@@ -1,21 +1,18 @@
 PODS:
   - Firebase (2.5.1)
-  - NKOColorPickerView (0.5)
   - TwilioCommon (0.2.2)
   - TwilioConversationsClient (0.24.1):
     - TwilioCommon (~> 0.2.0)
 
 DEPENDENCIES:
   - Firebase (< 3.0)
-  - NKOColorPickerView
   - TwilioConversationsClient (~> 0.24.0)
 
 SPEC CHECKSUMS:
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
-  NKOColorPickerView: 895ca86fe5bd16f27c311ce8f5888907efee29ad
   TwilioCommon: b697446b6f151255c4118f065e959c3dedee44e5
   TwilioConversationsClient: b14e7ad53f315bb3fbd86e4a2c9d3b6c07840739
 
-PODFILE CHECKSUM: e9a03822c189c28fdb241f1dc92bfff6ccd27711
+PODFILE CHECKSUM: 3f5f0bb185507761689105e1af8045574cb6526d
 
 COCOAPODS: 1.0.1
