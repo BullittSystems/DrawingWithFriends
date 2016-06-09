@@ -19,7 +19,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [Firebase setLoggingEnabled:YES];
     Dlog(@"Firebase Version: %@", [Firebase sdkVersion]);
     Dlog(@"Twilio Conversations Version: %@", [TwilioConversationsClient version]);
     Dlog(@"Twilio Common Version: %@", @"Unavailable");
