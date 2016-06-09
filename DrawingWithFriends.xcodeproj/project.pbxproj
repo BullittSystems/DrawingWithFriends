@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B9B20AA1D08E4B50038601D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20A91D08E4B50038601D /* main.m */; };
 		0B9B20AD1D08E4B50038601D /* JJZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20AC1D08E4B50038601D /* JJZAppDelegate.m */; };
-		0B9B20B01D08E4B50038601D /* JJZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20AF1D08E4B50038601D /* JJZViewController.m */; };
+		0B9B20B01D08E4B50038601D /* JJZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20AF1D08E4B50038601D /* JJZMainViewController.m */; };
 		0B9B20B31D08E4B50038601D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B9B20B11D08E4B50038601D /* Main.storyboard */; };
 		0B9B20B51D08E4B50038601D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B9B20B41D08E4B50038601D /* Assets.xcassets */; };
 		0B9B20B81D08E4B50038601D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B9B20B61D08E4B50038601D /* LaunchScreen.storyboard */; };
@@ -45,8 +45,8 @@
 		0B9B20A91D08E4B50038601D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0B9B20AB1D08E4B50038601D /* JJZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JJZAppDelegate.h; sourceTree = "<group>"; };
 		0B9B20AC1D08E4B50038601D /* JJZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JJZAppDelegate.m; sourceTree = "<group>"; };
-		0B9B20AE1D08E4B50038601D /* JJZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JJZViewController.h; sourceTree = "<group>"; };
-		0B9B20AF1D08E4B50038601D /* JJZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JJZViewController.m; sourceTree = "<group>"; };
+		0B9B20AE1D08E4B50038601D /* JJZMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JJZMainViewController.h; sourceTree = "<group>"; };
+		0B9B20AF1D08E4B50038601D /* JJZMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JJZMainViewController.m; sourceTree = "<group>"; };
 		0B9B20B21D08E4B50038601D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0B9B20B41D08E4B50038601D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B9B20B71D08E4B50038601D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -177,8 +177,8 @@
 		0B9B20DC1D08EB420038601D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0B9B20AE1D08E4B50038601D /* JJZViewController.h */,
-				0B9B20AF1D08E4B50038601D /* JJZViewController.m */,
+				0B9B20AE1D08E4B50038601D /* JJZMainViewController.h */,
+				0B9B20AF1D08E4B50038601D /* JJZMainViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -495,7 +495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B9B20B01D08E4B50038601D /* JJZViewController.m in Sources */,
+				0B9B20B01D08E4B50038601D /* JJZMainViewController.m in Sources */,
 				0B9B20E31D08ED910038601D /* UIDevice+Extensions.m in Sources */,
 				0B9B20AD1D08E4B50038601D /* JJZAppDelegate.m in Sources */,
 				0B9B20AA1D08E4B50038601D /* main.m in Sources */,

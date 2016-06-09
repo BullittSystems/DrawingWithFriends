@@ -1,5 +1,5 @@
 //
-//  JJZViewController.h
+//  JJZMainViewController.h
 //  DrawingWithFriends
 //
 //  Created by Ryan C. Payne on 6/8/16.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JJZViewController : UIViewController
+@interface JJZMainViewController : UIViewController
 
 
 @end
