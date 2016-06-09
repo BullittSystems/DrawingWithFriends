@@ -20,10 +20,10 @@
 		0B9B20E91D08FB080038601D /* JJZCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20E81D08FB080038601D /* JJZCanvasView.m */; };
 		0B9B20EC1D08FCC50038601D /* JJZDrawingPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20EB1D08FCC50038601D /* JJZDrawingPath.m */; };
 		0B9B20EF1D0902B60038601D /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20EE1D0902B60038601D /* UIColor+Hex.m */; };
-		0B9B20F21D09107D0038601D /* JJZCredentialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20F11D09107D0038601D /* JJZCredentialManager.m */; };
 		0B9B20F61D0916380038601D /* JJZPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20F51D0916380038601D /* JJZPerson.m */; };
 		0B9B20F91D0916EF0038601D /* JJZPeopleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20F81D0916EF0038601D /* JJZPeopleManager.m */; };
 		0B9B20FC1D09A7D00038601D /* JJZDrawingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20FB1D09A7D00038601D /* JJZDrawingManager.m */; };
+		0B9B20FF1D09B2420038601D /* JJZConversationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B20FE1D09B2420038601D /* JJZConversationManager.m */; };
 		225D9279F117026FCCA85BC7 /* libPods-DrawingWithFriends.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AFD0AB56BA7C0181DC2CF7C /* libPods-DrawingWithFriends.a */; };
 		50A0C6826D307D1B7F509A6B /* libPods-DrawingWithFriendsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD2A574AFBDAC004593249E /* libPods-DrawingWithFriendsUITests.a */; };
 		8346ADCC4056874A5FB7FA68 /* libPods-DrawingWithFriendsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EEE093CC78E69774F05B009 /* libPods-DrawingWithFriendsTests.a */; };
@@ -75,14 +75,14 @@
 		0B9B20EB1D08FCC50038601D /* JJZDrawingPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJZDrawingPath.m; sourceTree = "<group>"; };
 		0B9B20ED1D0902B60038601D /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		0B9B20EE1D0902B60038601D /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
-		0B9B20F01D09107D0038601D /* JJZCredentialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJZCredentialManager.h; sourceTree = "<group>"; };
-		0B9B20F11D09107D0038601D /* JJZCredentialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJZCredentialManager.m; sourceTree = "<group>"; };
 		0B9B20F41D0916380038601D /* JJZPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJZPerson.h; sourceTree = "<group>"; };
 		0B9B20F51D0916380038601D /* JJZPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJZPerson.m; sourceTree = "<group>"; };
 		0B9B20F71D0916EF0038601D /* JJZPeopleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJZPeopleManager.h; sourceTree = "<group>"; };
 		0B9B20F81D0916EF0038601D /* JJZPeopleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJZPeopleManager.m; sourceTree = "<group>"; };
 		0B9B20FA1D09A7D00038601D /* JJZDrawingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJZDrawingManager.h; sourceTree = "<group>"; };
 		0B9B20FB1D09A7D00038601D /* JJZDrawingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJZDrawingManager.m; sourceTree = "<group>"; };
+		0B9B20FD1D09B2420038601D /* JJZConversationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJZConversationManager.h; sourceTree = "<group>"; };
+		0B9B20FE1D09B2420038601D /* JJZConversationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJZConversationManager.m; sourceTree = "<group>"; };
 		0DD2A574AFBDAC004593249E /* libPods-DrawingWithFriendsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawingWithFriendsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EEE093CC78E69774F05B009 /* libPods-DrawingWithFriendsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawingWithFriendsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17805136458DE68C71FA6DF0 /* Pods-DrawingWithFriends.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawingWithFriends.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrawingWithFriends/Pods-DrawingWithFriends.release.xcconfig"; sourceTree = "<group>"; };
@@ -242,8 +242,8 @@
 		0B9B20F31D0910F10038601D /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				0B9B20F01D09107D0038601D /* JJZCredentialManager.h */,
-				0B9B20F11D09107D0038601D /* JJZCredentialManager.m */,
+				0B9B20FD1D09B2420038601D /* JJZConversationManager.h */,
+				0B9B20FE1D09B2420038601D /* JJZConversationManager.m */,
 				0B9B20FA1D09A7D00038601D /* JJZDrawingManager.h */,
 				0B9B20FB1D09A7D00038601D /* JJZDrawingManager.m */,
 				0B9B20F71D0916EF0038601D /* JJZPeopleManager.h */,
@@ -546,7 +546,7 @@
 				0B9B20AD1D08E4B50038601D /* JJZAppDelegate.m in Sources */,
 				0B9B20E91D08FB080038601D /* JJZCanvasView.m in Sources */,
 				0B9B20FC1D09A7D00038601D /* JJZDrawingManager.m in Sources */,
-				0B9B20F21D09107D0038601D /* JJZCredentialManager.m in Sources */,
+				0B9B20FF1D09B2420038601D /* JJZConversationManager.m in Sources */,
 				0B9B20EF1D0902B60038601D /* UIColor+Hex.m in Sources */,
 				0B9B20AA1D08E4B50038601D /* main.m in Sources */,
 				0B9B20E61D08EE0A0038601D /* JJZDraggableFloatyView.m in Sources */,
